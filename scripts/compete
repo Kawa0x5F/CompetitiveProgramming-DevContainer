@@ -17,11 +17,11 @@ EOF
   exit 1
 }
 
-# スクリプト自身の場所からリポジトリのルートを特定
-SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+# シンボリックリンクを解決して、スクリプト本体の真のパスを取得
+TRUE_SCRIPT_PATH=$(readlink -f "$0")
+SCRIPT_DIR=$(dirname "$TRUE_SCRIPT_PATH")
 REPO_ROOT=$(cd "$SCRIPT_DIR/.." && pwd)
 
-# 開発用の設定ファイルと、インストール後の設定ファイルのパスを両方定義
 CONFIG_FILE="$REPO_ROOT/config.default"
 
 # 見つかった設定ファイルを読み込む
