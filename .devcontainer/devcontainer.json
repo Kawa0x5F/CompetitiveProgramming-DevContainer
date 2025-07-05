@@ -10,6 +10,8 @@
   "workspaceFolder": "/workspace",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
 
+  "remoteUser": "compro",
+
   "postCreateCommand": "bash -c 'sudo ln -sf /workspace/scripts/compete /usr/local/bin/compete && mkdir -p ~/.config/compete-cli && cp /workspace/config.default ~/.config/compete-cli/config'",
 
   "customizations": {
