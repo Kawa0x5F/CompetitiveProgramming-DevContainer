@@ -1,0 +1,17 @@
+# compete-cli 設定ファイル
+
+### ディレクトリ設定 ###
+# 解答を保存するリポジトリのルートパスを指定してください
+# このパスはDevContainer内のパスになります (例: /workspace)
+SOLUTIONS_DIR="/workspace"
+
+### 言語設定 ###
+# ファイル名が省略された際の、言語の優先順位 (rs cpp py)
+DEFAULT_LANG_PRIORITY=("rs" "cpp" "py")
+
+# C++のコンパイルオプション
+CPP_FLAGS="-std=c++17 -Wall -O2"
+
+### accのテンプレート設定 ###
+# `acc new`で使うテンプレートのディレクトリ名を指定
+ACC_TEMPLATE_DIR="acc-template"
