@@ -1,5 +1,5 @@
 {
-  "name": "Compete Tool Development",
+  "name": "Competitive Programming Environment",
   "build": {
     "dockerfile": "Dockerfile"
   },
@@ -7,6 +7,11 @@
     "--security-opt",
     "seccomp=unconfined"
   ],
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+
+  "postCreateCommand": "bash -c 'sudo ln -sf /workspace/scripts/compete /usr/local/bin/compete && mkdir -p ~/.config/compete-cli && cp /workspace/config.default ~/.config/compete-cli/config'",
+
   "customizations": {
     "vscode": {
       "extensions": [
@@ -14,8 +19,7 @@
         "ms-python.python",
         "rust-lang.rust-analyzer",
         "tamasfe.even-better-toml",
-        "ms-azuretools.vscode-docker",
-        "shd101wyy.markdown-preview-enhanced"
+        "ms-azuretools.vscode-docker"
       ]
     }
   }
