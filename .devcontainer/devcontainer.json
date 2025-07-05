@@ -5,7 +5,9 @@
   },
   "runArgs": [
     "--security-opt",
-    "seccomp=unconfined"
+    "seccomp=unconfined",
+    "--env-file",
+    "${localWorkspaceFolder}/.devcontainer/.env"
   ],
   "workspaceFolder": "/workspace",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",

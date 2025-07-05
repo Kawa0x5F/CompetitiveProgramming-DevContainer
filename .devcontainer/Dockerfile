@@ -30,7 +30,7 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 RUN npm install -g atcoder-cli
 
 RUN python3.11 -m venv /opt/oj-tools && \
-    /opt/oj-tools/bin/pip install --no-cache-dir online-judge-tools
+    /opt/oj-tools/bin/pip install --no-cache-dir online-judge-tools setuptools selenium aclogin
 
 ENV PATH=/opt/oj-tools/bin:$PATH
 
