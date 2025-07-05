@@ -37,7 +37,7 @@ shift # サブコマンド名を引数リストから削除
 # サブコマンドに応じて処理を振り分ける
 case $SUBCOMMAND in
   new | fetch | test | submit | login | config)
-    "$(dirname "$0")"/compete-"$SUBCOMMAND".sh "$@"
+    "$SCRIPT_DIR"/compete-"$SUBCOMMAND".sh "$@"
     ;;
   *)
     usage
