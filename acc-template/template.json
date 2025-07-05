@@ -1,0 +1,24 @@
+{
+  "contest": {
+    "dir": "{{ contest.id }}",
+    "files": {
+      "Cargo.toml": {
+        "copy": "Cargo.toml.contest"
+      }
+    }
+  },
+  "task": {
+    "dir": "{{ task.id | lower }}",
+    "files": {
+      "main.rs": {
+        "copy": "main.rs"
+      },
+      "main.py": {
+        "copy": "main.py"
+      },
+      "main.cpp": {
+        "copy": "main.cpp"
+      }
+    }
+  }
+}

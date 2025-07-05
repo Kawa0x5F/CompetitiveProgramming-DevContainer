@@ -1,0 +1,40 @@
+[package]
+name = "{{ contest.id }}"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+proconio = "0.4.3"
+itertools = "0.12.1"
+
+[[bin]]
+name = "a"
+path = "a/main.rs"
+
+[[bin]]
+name = "b"
+path = "b/main.rs"
+
+[[bin]]
+name = "c"
+path = "c/main.rs"
+
+[[bin]]
+name = "d"
+path = "d/main.rs"
+
+[[bin]]
+name = "e"
+path = "e/main.rs"
+
+[[bin]]
+name = "f"
+path = "f/main.rs"
+
+[[bin]]
+name = "g"
+path = "g/main.rs"
+
+[[bin]]
+name = "ex"
+path = "ex/main.rs"
