@@ -1,0 +1,22 @@
+{
+  "name": "Compete Tool Development",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "runArgs": [
+    "--security-opt",
+    "seccomp=unconfined"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools",
+        "ms-python.python",
+        "rust-lang.rust-analyzer",
+        "tamasfe.even-better-toml",
+        "ms-azuretools.vscode-docker",
+        "shd101wyy.markdown-preview-enhanced"
+      ]
+    }
+  }
+}
