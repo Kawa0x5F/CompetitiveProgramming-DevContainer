@@ -39,7 +39,7 @@ esac
 
 # --- ターゲットディレクトリパスを動的に生成 ---
 # これにより、コマンドの実行場所に関わらず、常に正しい場所に作成される
-TARGET_PARENT_DIR="${REPO_ROOT}/${SOLUTIONS_DIR_NAME}/${SITE}"
+TARGET_PARENT_DIR="${REPO_ROOT}/${SOLUTIONS_DIR}/${SITE}"
 TARGET_CONTEST_DIR="${TARGET_PARENT_DIR}/${CONTEST_ID}"
 
 echo "Site: ${SITE}"
