@@ -25,26 +25,11 @@ CONTEST_TYPE=""
 
 # --- コンテストIDからサイトと種類を自動判別 ---
 case "$CONTEST_ID" in
-  abc*)
+  abc* | arc* | agc* | ahc*)
     SITE="AtCoder"
-    CONTEST_TYPE="ABC"
     ;;
-  arc*)
-    SITE="AtCoder"
-    CONTEST_TYPE="ARC"
-    ;;
-  agc*)
-    SITE="AtCoder"
-    CONTEST_TYPE="AGC"
-    ;;
-  ahc*)
-    SITE="AtCoder"
-    CONTEST_TYPE="AHC"
-    ;;
-  # 数字のみで構成されるIDはCodeforcesと見なす
   ^[0-9]+$)
     SITE="Codeforces"
-    CONTEST_TYPE="CONTEST" # Codeforcesは一つのタイプにまとめる
     ;;
   *)
     echo "エラー: 不明な形式のコンテストIDです: $CONTEST_ID"
@@ -54,10 +39,10 @@ esac
 
 # --- ターゲットディレクトリパスを動的に生成 ---
 # これにより、コマンドの実行場所に関わらず、常に正しい場所に作成される
-TARGET_PARENT_DIR="${REPO_ROOT}/${SOLUTIONS_DIR}/${SITE}/${CONTEST_TYPE}"
+TARGET_PARENT_DIR="${REPO_ROOT}/${SOLUTIONS_DIR_NAME}/${SITE}"
 TARGET_CONTEST_DIR="${TARGET_PARENT_DIR}/${CONTEST_ID}"
 
-echo "Contest Type: ${SITE} ${CONTEST_TYPE}"
+echo "Site: ${SITE}"
 echo "Creating contest '$CONTEST_ID' in '$TARGET_CONTEST_DIR'..."
 
 if [ -d "$TARGET_CONTEST_DIR" ]; then
