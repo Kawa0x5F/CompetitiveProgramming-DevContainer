@@ -93,3 +93,7 @@ elif [ "$SITE" == "Codeforces" ]; then
 fi
 
 echo "✅ Done. Contest directory created at: ${TARGET_CONTEST_DIR}"
+
+echo "-------------------------------------"
+echo "Updating rust-project.json for rust-analyzer..."
+"$SCRIPT_DIR/compete-rust-project.sh"
