@@ -51,7 +51,7 @@ SITE=$(get_contest_site)
 if [ "$SITE" == "AtCoder" ]; then
   acc submit "$FILE"
 elif [ "$SITE" == "Codeforces" ]; then
-  oj s --yes "$FILE"
+  oj s "$FILE"
 else
   echo "エラー: コンテストサイトを判別できませんでした。"
   exit 1
