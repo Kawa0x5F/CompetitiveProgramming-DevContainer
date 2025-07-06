@@ -2,8 +2,8 @@
 
 ### ディレクトリ設定 ###
 # 解答を保存するリポジトリのルートパスを指定してください
-# このパスはDevContainer内のパスになります (例: /workspace)
-SOLUTIONS_DIR="/workspace"
+# このパスはDevContainer内のパスになります
+SOLUTIONS_DIR="src"
 
 ### 言語設定 ###
 # ファイル名が省略された際の、言語の優先順位 (rs cpp py)

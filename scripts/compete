@@ -8,7 +8,6 @@ Usage: compete <subcommand> [options]
 
 Subcommands:
   new       Create a new contest environment.
-  fetch     Fetch sample cases for the current problem.
   test      Test a solution file against sample cases.
   submit    Submit a solution file.
   login     Log in to AtCoder and Codeforces.
@@ -27,6 +26,12 @@ CONFIG_FILE="$REPO_ROOT/config.default"
 # 見つかった設定ファイルを読み込む
 source "$CONFIG_FILE"
 
+# サブコマンドに引き継ぎたい変数を export する
+export SOLUTIONS_DIR
+export DEFAULT_LANG_PRIORITY
+export CPP_FLAGS
+export ACC_TEMPLATE_DIR
+
 # サブコマンドを取得
 SUBCOMMAND=${1:-}
 if [ -z "$SUBCOMMAND" ]; then
@@ -36,7 +41,7 @@ shift # サブコマンド名を引数リストから削除
 
 # サブコマンドに応じて処理を振り分ける
 case $SUBCOMMAND in
-  new | fetch | test | submit | login | config)
+  new | test | submit | login | config)
     "$SCRIPT_DIR"/compete-"$SUBCOMMAND".sh "$@"
     ;;
   *)
