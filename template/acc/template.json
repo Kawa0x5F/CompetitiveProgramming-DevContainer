@@ -1,26 +1,14 @@
 {
   "contest": {
-    "dir": "{{ contest.id }}",
-    "files": {
-      "Cargo.toml": {
-        "copy": "Cargo.toml.contest"
-      }
-    }
+    "dir": "{{ contest.id }}"
   },
   "task": {
     "dir": "{{ task.id | lower }}",
-    "files": {
-      "main.rs": {
-        "copy": "main.rs"
-      },
-      "main.cpp": {
-        "copy": "main.cpp"
-      },
-      "main.py": {
-        "copy": "main.py"
-      }
-    },
-    "program": ["main.rs", "main.cpp", "main.py"],
-    "submit": "main.rs"
+    "program": [
+      "main.rs",
+      "main.cpp",
+      "main.py"
+    ],
+    "submit": "{task.program}"
   }
 }

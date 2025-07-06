@@ -16,5 +16,6 @@ fi
 
 # atcoder-cli の設定
 acc config default-test-dirname-format test
+acc config default-task-choice all
 
 echo "--- セットアップが完了しました ---"

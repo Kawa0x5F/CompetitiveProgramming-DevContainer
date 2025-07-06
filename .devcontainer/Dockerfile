@@ -40,6 +40,9 @@ RUN python${PYTHON_VERSION} -m venv /opt/oj-tools && \
 RUN useradd -m -s /bin/bash compro && \
     echo "compro ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
+# comproユーザーにrustとcargoのディレクトリの所有権を渡す
+RUN chown -R compro:compro /usr/local/rustup /usr/local/cargo
+
 # ユーザーを切り替え
 USER compro
 WORKDIR /home/compro
