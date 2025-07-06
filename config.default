@@ -9,8 +9,23 @@ SOLUTIONS_DIR="src"
 # ファイル名が省略された際の、言語の優先順位 (rs cpp py)
 DEFAULT_LANG_PRIORITY=("rs" "cpp" "py")
 
-# C++のコンパイルオプション
-CPP_FLAGS=('-std=c++17' '-Wall' '-O2')
+# C++のコンパイルオプション（配列形式）
+CPP_COMPILER_FLAGS=(
+  '-std=gnu++20'
+  '-Wall'
+  '-Wextra'
+  '-O2'
+  '-DONLINE_JUDGE'
+  '-DATCODER'
+  '-mtune=native'
+  '-march=native'
+  '-I/opt/ac-library'
+  '-I/opt/boost/gcc/include'
+  '-I/usr/include/eigen3'
+)
+
+# C++のリンカオプション（文字列形式）
+CPP_LINKER_FLAGS='-L/opt/boost/gcc/lib -lgmpxx -lgmp'
 
 ### accのテンプレート設定 ###
 # `acc new`で使うテンプレートのディレクトリ名を指定

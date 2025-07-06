@@ -48,10 +48,10 @@ case $FILE in
     oj t -d "$TEST_DIR" -c "cargo run --bin $PROBLEM_NAME --release"
     ;;
   *.py)
-    oj t -d "$TEST_DIR" -c "python3 $FILE"
+    oj t -d "$TEST_DIR" -c "python3.11 $FILE"
     ;;
   *.cpp)
-    g++ "$FILE" -o a.out "${CPP_FLAGS}" && oj t -d "$TEST_DIR" -c "./a.out"
+    g++ "$FILE" -o a.out "${CPP_COMPILER_FLAGS[@]}" ${CPP_LINKER_FLAGS} && oj t -d "$TEST_DIR" -c "./a.out"
     ;;
   *)
     echo "エラー: サポートされていないファイル形式です: $FILE"
