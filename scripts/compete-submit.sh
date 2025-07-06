@@ -2,9 +2,16 @@
 
 set -eu
 
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+source "$SCRIPT_DIR/compete-lib.sh"
+
+REPO_ROOT=$(cd "$SCRIPT_DIR/.." && pwd)
+load_config
+
 FORCE_SUBMIT=false
 FILE=""
 
+# 引数の解析
 for arg in "$@"; do
   if [ "$arg" == "--force" ] || [ "$arg" == "-f" ]; then
     FORCE_SUBMIT=true
@@ -15,25 +22,17 @@ for arg in "$@"; do
   fi
 done
 
-if [ -z "$FILE" ]; then
-  for ext in "${DEFAULT_LANG_PRIORITY[@]}"; do
-    if [ -f "main.$ext" ]; then
-      FILE="main.$ext"
-      echo "提出ファイル: $FILE (自動検出)"
-      break
-    fi
-  done
-fi
+detect_source_file FILE
 
 if [ -z "$FILE" ]; then
   echo "エラー: 提出対象のソースファイルが見つかりません。"
   exit 1
 fi
 
+# テストの実行（--forceでスキップ）
 if [ "$FORCE_SUBMIT" = false ]; then
   echo "提出前にテストを実行します..."
-  # compete-test.sh を呼び出す
-  "$(dirname "$0")/compete-test.sh" "$FILE"
+  "$SCRIPT_DIR/compete-test.sh" "$FILE"
   
   if [ $? -ne 0 ]; then
     echo "テストに失敗しました。提出を中断します。"
@@ -45,12 +44,13 @@ else
   echo "テストをスキップして提出します... (--force)"
 fi
 
+# 提出処理
 echo "提出処理を開始します: $FILE"
-CURRENT_PATH=$(pwd)
+SITE=$(get_contest_site)
 
-if [[ "$CURRENT_PATH" == *"/AtCoder/"* ]]; then
+if [ "$SITE" == "AtCoder" ]; then
   acc submit "$FILE"
-elif [[ "$CURRENT_PATH" == *"/Codeforces/"* ]]; then
+elif [ "$SITE" == "Codeforces" ]; then
   oj s --yes "$FILE"
 else
   echo "エラー: コンテストサイトを判別できませんでした。"

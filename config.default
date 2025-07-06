@@ -10,8 +10,11 @@ SOLUTIONS_DIR="src"
 DEFAULT_LANG_PRIORITY=("rs" "cpp" "py")
 
 # C++のコンパイルオプション
-CPP_FLAGS="-std=c++17 -Wall -O2"
+CPP_FLAGS=('-std=c++17' '-Wall' '-O2')
 
 ### accのテンプレート設定 ###
 # `acc new`で使うテンプレートのディレクトリ名を指定
-ACC_TEMPLATE_DIR="acc-template"
+ACC_TEMPLATE_DIR="template/acc"
+
+### Codeforces用のテンプレート設定 ###
+CF_TEMPLATE_DIR="template/cf"

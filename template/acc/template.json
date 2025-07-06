@@ -13,12 +13,14 @@
       "main.rs": {
         "copy": "main.rs"
       },
-      "main.py": {
-        "copy": "main.py"
-      },
       "main.cpp": {
         "copy": "main.cpp"
+      },
+      "main.py": {
+        "copy": "main.py"
       }
-    }
+    },
+    "program": ["main.rs", "main.cpp", "main.py"],
+    "submit": "main.rs"
   }
 }

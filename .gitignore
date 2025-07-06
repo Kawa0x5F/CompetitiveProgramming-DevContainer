@@ -1,3 +1,29 @@
-.vscode/
+# ## コンパイル成果物 ##
+# C++
+a.out
 
-.env
+# Rust
+target/
+
+
+# ## 自動生成されるテストケース ##
+# atcoder-cli (acc)
+test/
+# online-judge-tools (oj)
+tests/
+
+
+# ## 環境変数・機密情報 ##
+# Dev Containerの環境変数ファイル（最重要）
+.devcontainer/.env
+
+
+# ## OS・エディタ固有ファイル ##
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# VS Code
+.vscode/

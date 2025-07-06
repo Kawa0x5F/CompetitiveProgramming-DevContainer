@@ -11,10 +11,13 @@
   ],
   "workspaceFolder": "/workspace",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
-
   "remoteUser": "compro",
 
-  "postCreateCommand": "bash -c 'sudo ln -sf /workspace/scripts/compete /usr/local/bin/compete && mkdir -p ~/.config/compete-cli && cp /workspace/config.default ~/.config/compete-cli/config'",
+  // 初回起動時のセットアップ
+  "postCreateCommand": "bash /workspace/scripts/setup-dev.sh",
+  
+  // コンテナ起動のたびにログインを実行
+  "postStartCommand": "bash /workspace/scripts/compete-login.sh",
 
   "customizations": {
     "vscode": {
