@@ -5,8 +5,8 @@
 
 このリポジトリでは、AtCoderやCodeforcesなどの競技プログラミング用の環境を提供します。
 VS Code Dev Containersを利用することで、WindowsやMacなどに関わらず、統一された環境で競プロを行えます。
+oj、accを利用したラッパーコマンド`compete`を実装しており、コードのテストや提出をコマンド一つでできます。
 
-oj、accを同じように利用するために`compete`コマンドを実装しており、コードのテストや提出を面倒な設定無く行うことが可能です。
 デフォルトでRust、C++、Pythonの基礎環境が構築されますが、設定ファイルを調整することで任意の言語に置き換えることができます。
 
 ## 導入手順
@@ -15,48 +15,45 @@ oj、accを同じように利用するために`compete`コマンドを実装し
 
   * [Visual Studio Code](https://code.visualstudio.com/)
   * [Dev Containers 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
-  * [Docker Desktop](https://www.docker.com/products/docker-desktop/) または互換性のあるDocker環境
+  * [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 ### 2\. リポジトリのクローン
 
-このリポジトリをローカルマシンにクローンします。
+このリポジトリをローカルにクローン、もしくはフォークします。
 
 ```bash
-git clone <your-repository-url>
-cd <repository-directory>
+$ git clone https://github.com/Kawa0x5F/CompetitiveProgramming-DevContainer.git
 ```
 
-### 3\. 環境変数ファイル `.env` の作成
+### 3\. 環境変数ファイル `.env`, `setting.json`の作成
 
-ログイン情報などの機密情報を格納するための`.env`ファイルを作成します。`.gitignore`によってGitの追跡対象から除外されているため、安全です。
+ログイン情報などを格納するための`.env`ファイルと、Rustのプロジェクト情報を持つための`setting.json`ファイル、それを格納するための`.vscode`ディレクトリを作成します。
 
 ```bash
-cp .devcontainer/.env.example .devcontainer/.env
+$ cp .devcontainer/.env.example .devcontainer/.env
+$ mkdir .vscode
+$ cp .devcontainer/setting.sample.json .vscode/setting.json
 ```
 
-次に、作成した`.devcontainer/.env`ファイルを開き、あなたの情報に合わせて内容を編集してください。
+作成した`.devcontainer/.env`ファイルを開き、ログイン情報・セッション情報を入力してください。
 
 ```ini
-# --- AtCoder ---
-# セッション情報でのログインを推奨（安全性が高い）
+# AtCoder
+ATCODER_USERNAME="YOUR_ATCODER_USERNAME"
+ATCODER_PASSWORD="YOUR_ATCODER_PASSWORD"
 # ブラウザでAtCoderにログイン後、開発者ツールでCookieからREVEL_SESSIONの値をコピー
-ATCODER_REVEL_SESSION="<your_revel_session_value>"
+ATCODER_REVEL_SESSION="YOUR_REVEL_SESSION_COOKIE"
 
-# ユーザー名/パスワードでのログインも可能（非推奨）
-# ATCODER_USERNAME="<your_atcoder_username>"
-# ATCODER_PASSWORD="<your_atcoder_password>"
-
-
-# --- Codeforces ---
-CODEFORCES_USERNAME="<your_codeforces_username>"
-CODEFORCES_PASSWORD="<your_codeforces_password>"
+# Codeforces
+CODEFORCES_USERNAME="YOUR_CODEFORCES_USERNAME"
+CODEFORCES_PASSWORD="YOUR_CODEFORCES_PASSWORD"```
 ```
 
 ### 4\. Dev Containerで開く
 
 1.  VS Codeでこのリポジトリのフォルダを開きます。
-2.  左下の緑色の`><`アイコンをクリックし、表示されたメニューから「Reopen in Container」を選択します。
-3.  初回起動時はDockerイメージのビルドが実行されるため、数分かかります。ビルド完了後、環境が自動的にセットアップされ、ログイン処理が実行されます。
+2.  左下の`><`アイコンをクリックし、表示されたメニューから「Reopen in Container」を選択します。
+3.  初回起動時はDockerイメージのビルドが実行されるため、起動に数分かかります。ビルド完了後、環境が自動的にセットアップされ、`.env`ファイルの情報に基づいてログイン処理が実行されます。
 
 -----
 
@@ -77,19 +74,22 @@ compete new arc180
 compete new 1985
 ```
 
+コンテストがオープンになってからでないとうまく正常に動作しない点に注意してください。
+
 ### コードのテスト (`compete test`)
 
-カレントディレクトリの問題に対するテストを実行します。初回実行時には、自動でサンプルケースをダウンロードします。
+カレントディレクトリの問題に対するテストを実行します。
+サンプルのテストケースがなかった場合、自動でダウンロードします。
 
 ```bash
 # abc365/a ディレクトリに移動してから実行
 cd solutions/AtCoder/ABC/abc365/a
 
-# main.cpp を自動で見つけてテストする
+# main.rs を自動で見つけてテストする
 compete test
 
 # ファイルを明示的に指定してテストする
-compete test main.rs
+compete test main.cpp
 ```
 
 ### コードの提出 (`compete submit`)
@@ -97,11 +97,11 @@ compete test main.rs
 ファイルを指定して解答を提出します。提出前に自動でテストが実行されます。
 
 ```bash
-# main.cpp を自動で見つけてテストし、提出する
+# main.rs を自動で見つけてテストし、提出する
 compete submit
 
 # テストをスキップして強制的に提出する
-compete submit --force main.py
+compete submit --force main.rs
 ```
 
 ### 設定ファイルの管理 (`compete config`)
@@ -123,13 +123,13 @@ compete config edit
 ```
 .
 ├── .devcontainer/
-│   ├── Dockerfile       # Dev Containerの環境定義
+│   ├── Dockerfile        # Dev Containerの環境定義
 │   ├── devcontainer.json # Dev Containerの設定
-│   └── .env             # 環境変数ファイル（Git管理外）
-├── config.default       # competeコマンドや各ツールの設定ファイル
-├── scripts/             # competeコマンドのスクリプト群
-├── solutions/           # 解答コードを保存するディレクトリ
-└── templates/           # 各言語・サイトのテンプレートファイル
+│   └── .env              # 環境変数ファイル（Git管理外）
+├── config.default        # competeコマンドや各ツールの設定ファイル
+├── scripts/              # competeコマンドのスクリプト群
+├── src/                  # 解答コードを保存するディレクトリ
+└── templates/            # 各言語・サイトのテンプレートファイル
 ```
 
 ## カスタマイズ
@@ -140,4 +140,4 @@ compete config edit
 
 ### テンプレートの編集
 
-`templates/`ディレクトリ内の各テンプレート（`ac-rust/`や`cf/`など）を編集することで、`compete new`で生成されるファイルの雛形を自由に変更できます。
+`templates/`ディレクトリ内の各テンプレート（`acc/`や`cf/`など）を編集することで、`compete new`で生成されるファイルの雛形を自由に変更できます。
